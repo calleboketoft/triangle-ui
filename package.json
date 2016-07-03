@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node server",
     "build": "npm run typescript",
-    "prepublish": "npm run build",
     "typescript": "tsc",
     "watch": "tsc -w",
     "typings": "typings",
