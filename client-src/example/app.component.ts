@@ -60,14 +60,13 @@ export class AppComponent {
     })
 
     this.triForm.valueChanges.subscribe((res) => {
-      console.log(res)
-      console.log(this.triForm)
       if (this.triForm.valid) {
         try {
+          let controls = this.triForm.controls
           this.triangleResult = typeOfTriangle(
-            +this.triForm.controls.sideA.value,
-            +this.triForm.controls.sideB.value,
-            +this.triForm.controls.sideC.value
+            +controls.sideA.value,
+            +controls.sideB.value,
+            +controls.sideC.value
           )
         } catch (err) {
           this.triangleResult = err.message
@@ -80,14 +79,6 @@ export class AppComponent {
 
   public getErrorMessage (side) {
     let errorType = Object.keys(side.errors)[0]
-    if (errorType === 'required') {
-      return 'Required field'
-    } else {
-      return side.errors[errorType]
-    }
-  }
-
-  logit (item) {
-    console.log(item)
+    return errorType === 'required' ? 'Required field' : side.errors[errorType]
   }
 }

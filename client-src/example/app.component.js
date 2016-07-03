@@ -29,11 +29,10 @@ var AppComponent = (function () {
             sideC: ['', [forms_1.Validators.required, validateTriangleSide]]
         });
         this.triForm.valueChanges.subscribe(function (res) {
-            console.log(res);
-            console.log(_this.triForm);
             if (_this.triForm.valid) {
                 try {
-                    _this.triangleResult = triangle_1.typeOfTriangle(+_this.triForm.controls.sideA.value, +_this.triForm.controls.sideB.value, +_this.triForm.controls.sideC.value);
+                    var controls = _this.triForm.controls;
+                    _this.triangleResult = triangle_1.typeOfTriangle(+controls.sideA.value, +controls.sideB.value, +controls.sideC.value);
                 }
                 catch (err) {
                     _this.triangleResult = err.message;
@@ -46,15 +45,7 @@ var AppComponent = (function () {
     }
     AppComponent.prototype.getErrorMessage = function (side) {
         var errorType = Object.keys(side.errors)[0];
-        if (errorType === 'required') {
-            return 'Required field';
-        }
-        else {
-            return side.errors[errorType];
-        }
-    };
-    AppComponent.prototype.logit = function (item) {
-        console.log(item);
+        return errorType === 'required' ? 'Required field' : side.errors[errorType];
     };
     AppComponent = __decorate([
         core_1.Component({
